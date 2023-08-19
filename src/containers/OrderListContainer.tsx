@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderList from './OrderList'
+import OrderList from '../components/OrderList/OrderList'
 
 export default function OrderListContainer() {
   return (
