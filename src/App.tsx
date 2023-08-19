@@ -1,10 +1,11 @@
-import './App.css'
+import React from "react"
+import OrderListContainer from "./components/OrderListContainer"
 
 function App() {
 
   return (
     <>
-     <h1>Hola Mundo</h1>
+     <OrderListContainer />
     </>
   )
 }
