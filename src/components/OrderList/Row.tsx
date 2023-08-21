@@ -58,8 +58,8 @@ export default function Row(props: { row: MockedOrder }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.items.map((productRow) => (
-                    <TableRow key={row.id}>
+                  {row.items.map((productRow, i) => (
+                    <TableRow key={i}>
                       <TableCell component="th" scope="row">
                         {productRow.id}
                       </TableCell>

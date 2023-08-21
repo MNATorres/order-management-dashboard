@@ -6,6 +6,7 @@ import Fade from "@mui/material/Fade";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import TravelingFilterCalendar from "./TravelingFilterCalendar";
 
 interface OrderFilterProps {
   onFilter: (filterValue: string) => void;
@@ -58,11 +59,20 @@ export default function OrderFilter({ onFilter }: OrderFilterProps) {
           Status
         </Typography>
         <MenuItem onClick={() => handleStatusClick("")}>All Status</MenuItem>
-        <MenuItem onClick={() => handleStatusClick("Approve")}>Approve</MenuItem>
+        <MenuItem onClick={() => handleStatusClick("Approve")}>
+          Approve
+        </MenuItem>
         <MenuItem onClick={() => handleStatusClick("Cancel")}>Cancel</MenuItem>
-        <MenuItem onClick={() => handleStatusClick("Delivery")}>Delivery</MenuItem>
-        <MenuItem onClick={() => handleStatusClick("Traveling")}>Traveling</MenuItem>
-        <MenuItem onClick={() => handleStatusClick("Deliver in 48 hours")}>
+        <MenuItem onClick={() => handleStatusClick("Delivery")}>
+          Delivery
+        </MenuItem>
+        <MenuItem sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Button sx={{}} onClick={() => handleStatusClick("Traveling")}>
+            Traveling
+          </Button>
+          <TravelingFilterCalendar />
+        </MenuItem>
+        <MenuItem onClick={() => handleStatusClick("DeliverSoon")}>
           Deliver in 48 hours
         </MenuItem>
       </Menu>
