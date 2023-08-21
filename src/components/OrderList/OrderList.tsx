@@ -10,8 +10,14 @@ import { TableFooter, TablePagination } from "@mui/material";
 import { MockedOrder } from "../../services/api";
 import TablePaginationActions from "./TablePaginationActions";
 import Row from "./Row";
+import OrderFilter from "./OrderFilter";
 
-export default function OrderList({ orders }: { orders: MockedOrder[] }) {
+interface OrderListProps {
+  onFilter: (filterValue: string) => void;
+  orders: MockedOrder[]
+}
+
+export default function OrderList({ orders, onFilter } : OrderListProps)  {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -34,7 +40,9 @@ export default function OrderList({ orders }: { orders: MockedOrder[] }) {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell>Ver</TableCell>
+            <TableCell>
+              <OrderFilter onFilter={onFilter} />
+            </TableCell>
             <TableCell>Cliente</TableCell>
             <TableCell align="right">Status</TableCell>
             <TableCell align="right">CreateDate</TableCell>

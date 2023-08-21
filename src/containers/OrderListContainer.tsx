@@ -5,12 +5,14 @@ import { getOrderList } from "../services/OrdersService";
 
 export default function OrderListContainer() {
   const [orders, setOrders] = useState<MockedOrder[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<MockedOrder[]>([]); 
 
   useEffect(() => {
     async function fetchOrders() {
       try {
         const ordersData = await getOrderList();
         setOrders(ordersData);
+        setFilteredOrders(ordersData); 
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -19,11 +21,18 @@ export default function OrderListContainer() {
     fetchOrders();
   }, []);
 
-  console.log(orders.map)
+  const handleFilter = (filterValue: string) => {
+    if (filterValue === "") {
+      setFilteredOrders(orders);
+    } else {
+      const filtered = orders.filter((order) => order.status === filterValue);
+      setFilteredOrders(filtered);
+    }
+  };
 
   return (
     <div>
-      <OrderList orders={orders} />
+      <OrderList orders={filteredOrders} onFilter={handleFilter} />
     </div>
   );
 }
