@@ -46,7 +46,6 @@ export function useFilteredOrders() {
       const deliveryDate = new Date(year, month - 1, day);
       const timeDifference = deliveryDate.getTime() - currentDate.getTime();
       const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
-      console.log('daysDifference',daysDifference)
       
       return daysDifference <= 2;
     }

@@ -16,7 +16,7 @@ import { useFilteredOrders } from "../../hooks/useFilterOrders";
 
 export default function OrderList()  {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(-1);
   const {orders, filterOrders} = useFilteredOrders()
 
   const handleChangePage = (
@@ -70,7 +70,7 @@ export default function OrderList()  {
           <TableRow>
             <TablePagination
               sx={{ borderBottom: 0}}
-              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+              rowsPerPageOptions={[{ label: "All", value: -1 }, 5, 10, 25 ]}
               colSpan={3}
               count={orders.length}
               rowsPerPage={rowsPerPage}
