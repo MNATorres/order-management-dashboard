@@ -1,28 +1,18 @@
 import { Box, Button } from "@mui/material";
-import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useFilteredOrders } from "./../../hooks/useFilterOrders";
 
 export default function Calendar() {
-  const today = new Date();
-  const nextMonth = new Date();
-  nextMonth.setMonth(nextMonth.getMonth() + 1);
+  const { setStartDate, setEndDate, filterOrders, startDate, endDate } = useFilteredOrders();
 
-  const [startDate, setStartDate] = useState<Date | null>(today);
-  const [endDate, setEndDate] = useState<Date | null>(nextMonth);
 
-  useEffect(() => {
-    if (startDate) {
-      const newEndDate = new Date(startDate);
-      newEndDate.setMonth(newEndDate.getMonth() + 1);
-      setEndDate(newEndDate);
-    }
-  }, [startDate]);
+  const handleApplyFilters = () => {
+    filterOrders("Traveling");
+  };
 
   return (
-    <Box
-      sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-    >
+    <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <DatePicker
           selected={startDate}
@@ -44,8 +34,12 @@ export default function Calendar() {
         />
       </Box>
       <Box>
-        <Button sx={{ marginTop: 2 }} variant="contained">
-          Apli
+        <Button
+          sx={{ marginTop: 2 }}
+          variant="contained"
+          onClick={handleApplyFilters}
+        >
+          Aplicar Filtros
         </Button>
       </Box>
     </Box>

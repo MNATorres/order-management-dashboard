@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import OrderList from "../components/OrderList/OrderList";
 import { MockedOrder } from "../services/api";
 import { getOrderList } from "../services/OrdersService";
 
-export default function OrderListContainer() {
+export function useFilteredOrders() {
   const [orders, setOrders] = useState<MockedOrder[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<MockedOrder[]>([]);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   useEffect(() => {
     async function fetchOrders() {
@@ -19,18 +20,24 @@ export default function OrderListContainer() {
     }
 
     fetchOrders();
-  }, []);
+  }, [startDate, endDate]);
 
   const handleFilter = (filterValue: string) => {
+    let filtered = orders;
+
     if (filterValue === "DeliverSoon") {
-      const filtered = orders.filter(isNearDelivery);
-      setFilteredOrders(filtered);
-    } else if (filterValue === "") {
-      setFilteredOrders(orders);
-    } else {
-      const filtered = orders.filter((order) => order.status === filterValue);
-      setFilteredOrders(filtered);
+      filtered = filtered.filter(isNearDelivery);
+    } else if (filterValue !== "") {
+      filtered = filtered.filter((order) => order.status === filterValue);
     }
+
+    if (startDate && endDate) {
+      filtered = filtered.filter((order) =>
+        isTravelingAndInDateRange(order, startDate, endDate)
+      );
+    }
+    console.log(filtered);
+    setFilteredOrders(filtered);
   };
 
   const isNearDelivery = (order: MockedOrder) => {
@@ -45,9 +52,27 @@ export default function OrderListContainer() {
     return false;
   };
 
-  return (
-    <div>
-      <OrderList orders={filteredOrders} onFilter={handleFilter} />
-    </div>
-  );
+  const isTravelingAndInDateRange = (
+    order: MockedOrder,
+    start: Date,
+    end: Date
+  ) => {
+    if (order.status === "Traveling") {
+      const [day, month, year] = order.createDate.split("/").map(Number);
+      const orderCreateDate = new Date(year, month - 1, day);
+
+      const isInRange = orderCreateDate >= start && orderCreateDate <= end;
+      return isInRange;
+    }
+    return false;
+  };
+
+  return {
+    orders: filteredOrders,
+    filterOrders: handleFilter,
+    setStartDate,
+    setEndDate,
+    endDate,
+    startDate,
+  };
 }

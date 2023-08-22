@@ -11,16 +11,13 @@ import { MockedOrder } from "../../services/api";
 import TablePaginationActions from "./TablePaginationActions";
 import Row from "./Row";
 import OrderFilter from "./OrderFilter";
+import { useFilteredOrders } from "../../hooks/useFilterOrders";
 
 
-interface OrderListProps {
-  onFilter: (filterValue: string) => void;
-  orders: MockedOrder[]
-}
-
-export default function OrderList({ orders, onFilter } : OrderListProps)  {
+export default function OrderList()  {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const {orders, filterOrders} = useFilteredOrders()
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -42,7 +39,7 @@ export default function OrderList({ orders, onFilter } : OrderListProps)  {
         <TableHead>
           <TableRow>
             <TableCell>
-              <OrderFilter onFilter={onFilter} />
+              <OrderFilter onFilter={filterOrders} />
             </TableCell>
             <TableCell>Cliente</TableCell>
             <TableCell align="right">Status</TableCell>
@@ -52,7 +49,7 @@ export default function OrderList({ orders, onFilter } : OrderListProps)  {
             <TableCell align="right">ID</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody sx={{ marginBottom: 10 }}>
+        <TableBody>
           {(rowsPerPage > 0
             ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : orders
@@ -65,14 +62,14 @@ export default function OrderList({ orders, onFilter } : OrderListProps)  {
             position: "fixed",
             bottom: 0,
             width: "100%",
-            background: "red",
+            background: "#1976d2",
             display: "flex",
             justifyContent: "center",
           }}
         >
           <TableRow>
             <TablePagination
-              sx={{ borderBottom: 0 }}
+              sx={{ borderBottom: 0}}
               rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
               colSpan={3}
               count={orders.length}
