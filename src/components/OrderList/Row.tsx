@@ -7,12 +7,14 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Typography from "@mui/material/Typography";
 import { MockedOrder } from "../../services/api";
 import {
+  Link,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
 } from "@mui/material";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 export default function Row(props: { row: MockedOrder }) {
   const { row } = props;
@@ -39,10 +41,10 @@ export default function Row(props: { row: MockedOrder }) {
         <TableCell align="right">{row.shippingPromise}</TableCell>
         <TableCell align="right">{row.id}</TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
+            <Box>
               <Typography variant="h6" gutterBottom component="div">
                 Products
               </Typography>
@@ -67,7 +69,11 @@ export default function Row(props: { row: MockedOrder }) {
                       <TableCell align="right">
                         {productRow.description}
                       </TableCell>
-                      <TableCell align="right">{productRow.url}</TableCell>
+                      <TableCell align="right">
+                        <Link href={productRow.url} underline="hover">
+                          <LaunchIcon />
+                        </Link>
+                      </TableCell>
                       <TableCell align="right">{productRow.price}</TableCell>
                       <TableCell align="right">{productRow.quantity}</TableCell>
                     </TableRow>
