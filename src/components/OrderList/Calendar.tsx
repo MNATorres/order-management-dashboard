@@ -17,7 +17,7 @@ export default function Calendar() {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => setStartDate(date ?? undefined)}
           selectsStart
           startDate={startDate}
           endDate={endDate}
@@ -26,7 +26,7 @@ export default function Calendar() {
         />
         <DatePicker
           selected={endDate}
-          onChange={(date) => setEndDate(date)}
+          onChange={(date) => setEndDate(date ?? undefined)}
           selectsEnd
           startDate={startDate}
           endDate={endDate}
