@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Typography from "@mui/material/Typography";
-import { MockedOrder } from "../../services/api";
+import { OrderData } from "../../services/api";
 import {
   Link,
   Table,
@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 
-export default function Row(props: { row: MockedOrder }) {
+export default function Row(props: { row: OrderData }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -60,8 +60,8 @@ export default function Row(props: { row: MockedOrder }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.items.map((productRow, i) => (
-                    <TableRow key={i}>
+                  {row.items.map((productRow) => (
+                    <TableRow key={productRow._id}>
                       <TableCell component="th" scope="row">
                         {productRow.id}
                       </TableCell>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { MockedOrder } from "../services/api";
+import { OrderData } from "../services/api";
 import { getOrderList } from "../services/OrdersService";
 
 export function useFilteredOrders() {
-  const [orders, setOrders] = useState<MockedOrder[]>([]);
-  const [filteredOrders, setFilteredOrders] = useState<MockedOrder[]>([]);
+  const [orders, setOrders] = useState<OrderData[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<OrderData[]>([]);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -39,7 +39,7 @@ export function useFilteredOrders() {
     setFilteredOrders(filtered);
   };
 
-  const isNearDelivery = (order: MockedOrder) => {
+  const isNearDelivery = (order: OrderData) => {
     if (order.status === "Approve") {
       const currentDate = new Date();
       const [day, month, year] = order.shippingPromise.split("/").map(Number);
@@ -53,7 +53,7 @@ export function useFilteredOrders() {
   };
 
   const isTravelingAndInDateRange = (
-    order: MockedOrder,
+    order: OrderData,
     start: Date,
     end: Date
   ) => {

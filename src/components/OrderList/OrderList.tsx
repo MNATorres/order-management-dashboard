@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableFooter, TablePagination } from "@mui/material";
-import { MockedOrder } from "../../services/api";
+import { OrderData } from "../../services/api";
 import TablePaginationActions from "./TablePaginationActions";
 import Row from "./Row";
 import OrderFilter from "./OrderFilter";
@@ -53,8 +53,8 @@ export default function OrderList()  {
           {(rowsPerPage > 0
             ? orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : orders
-          ).map((order: MockedOrder) => (
-            <Row key={order.id} row={order} />
+          ).map((order: OrderData) => (
+            <Row key={order._id} row={order} />
           ))}
         </TableBody>
         <TableFooter
@@ -70,7 +70,7 @@ export default function OrderList()  {
           <TableRow>
             <TablePagination
               sx={{ borderBottom: 0}}
-              rowsPerPageOptions={[{ label: "All", value: -1 }, 5, 10, 25 ]}
+              rowsPerPageOptions={[ 5, 10, 25,  {label: "All", value: -1 } ]}
               colSpan={3}
               count={orders.length}
               rowsPerPage={rowsPerPage}
