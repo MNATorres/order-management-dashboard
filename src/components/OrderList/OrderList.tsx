@@ -7,11 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableFooter, TablePagination } from "@mui/material";
-import { OrderData } from "../../services/api";
 import TablePaginationActions from "./TablePaginationActions";
 import Row from "./Row";
 import OrderFilter from "./OrderFilter";
 import { useFilteredOrders } from "../../hooks/useFilterOrders";
+import { OrderData } from "../../domain/OrderData";
 
 
 export default function OrderList()  {

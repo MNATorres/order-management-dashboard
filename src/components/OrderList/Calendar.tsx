@@ -2,13 +2,14 @@ import { Box, Button } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFilteredOrders } from "./../../hooks/useFilterOrders";
+import { Filter } from "../../domain/Filters";
 
 export default function Calendar() {
   const { setStartDate, setEndDate, filterOrders, startDate, endDate } = useFilteredOrders();
 
 
   const handleApplyFilters = () => {
-    filterOrders("Traveling");
+    filterOrders(Filter.Traveling);
   };
 
   return (
@@ -21,7 +22,7 @@ export default function Calendar() {
           startDate={startDate}
           endDate={endDate}
           dateFormat="dd/MM/yyyy"
-          placeholderText="Inicio"
+          placeholderText="dd/MM/yyyy"
         />
         <DatePicker
           selected={endDate}
@@ -31,6 +32,7 @@ export default function Calendar() {
           endDate={endDate}
           minDate={startDate}
           dateFormat="dd/MM/yyyy"
+          placeholderText="dd/MM/yyyy"
         />
       </Box>
       <Box>

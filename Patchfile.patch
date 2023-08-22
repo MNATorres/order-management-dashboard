@@ -1,0 +1,88 @@
+diff --git a/jest.config.js b/jest.config.js
+new file mode 100644
+index 0000000..f8d02a5
+--- /dev/null
++++ b/jest.config.js
+@@ -0,0 +1,4 @@
++module.exports = {
++    testEnvironment: 'jest-environment-jsdom',
++    setupFiles: ['./jest.setup.js']
++}
+\ No newline at end of file
+diff --git a/src/domain/Filters.ts b/src/domain/Filters.ts
+new file mode 100644
+index 0000000..2901b8b
+--- /dev/null
++++ b/src/domain/Filters.ts
+@@ -0,0 +1,8 @@
++export enum Filter {
++    NoFilter = "",
++    DeliverSoon = "DeliverSoon",
++    Approve = "Approve",
++    Cancel = "Cancel",
++    Traveling = "Traveling",
++    Delivery = "Delivery"
++}
+diff --git a/src/domain/OrderData.ts b/src/domain/OrderData.ts
+new file mode 100644
+index 0000000..d62ee83
+--- /dev/null
++++ b/src/domain/OrderData.ts
+@@ -0,0 +1,13 @@
++import { ProductData } from "./ProductData";
++import { Status } from "./Status";
++
++export interface OrderData {
++    id: number;
++    createDate: Date;
++    status: Status;
++    client: string;
++    shippingAddress: string;
++    shippingPromise: string;
++    _id: string;
++    items: ProductData[];
++  }
+\ No newline at end of file
+diff --git a/src/domain/ProductData.ts b/src/domain/ProductData.ts
+new file mode 100644
+index 0000000..e67cc98
+--- /dev/null
++++ b/src/domain/ProductData.ts
+@@ -0,0 +1,9 @@
++export interface ProductData {
++    id: number;
++    title: string;
++    description: string;
++    url: string;
++    price: string;
++    quantity: number;
++    _id:string;
++  };
+\ No newline at end of file
+diff --git a/src/domain/Status.ts b/src/domain/Status.ts
+new file mode 100644
+index 0000000..31d35b1
+--- /dev/null
++++ b/src/domain/Status.ts
+@@ -0,0 +1,7 @@
++export enum Status {
++    DeliverSoon = "DeliverSoon",
++    Approve = "Approve",
++    Cancel = "Cancel",
++    Traveling = "Traveling",
++    Delivery = "Delivery"
++}
+\ No newline at end of file
+diff --git a/src/tests/useFilterOrders.test.ts b/src/tests/useFilterOrders.test.ts
+new file mode 100644
+index 0000000..bebc048
+--- /dev/null
++++ b/src/tests/useFilterOrders.test.ts
+@@ -0,0 +1,6 @@
++
++describe("useFilterOrders tests", () => {
++    it("isTravelingAndInDateRange happy path", () => {
++        
++    })
++})
+\ No newline at end of file

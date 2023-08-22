@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { OrderData } from "../services/api";
 import { getOrderList } from "../services/OrdersService";
+import { OrderData } from "../domain/OrderData";
+import { Status } from "../domain/Status";
+import { Filter } from "../domain/Filters";
 
 export function useFilteredOrders() {
   const [orders, setOrders] = useState<OrderData[]>([]);
@@ -25,9 +27,9 @@ export function useFilteredOrders() {
   const handleFilter = (filterValue: string) => {
     let filtered = orders;
 
-    if (filterValue === "DeliverSoon") {
+    if (filterValue === Filter.DeliverSoon) {
       filtered = filtered.filter(isNearDelivery);
-    } else if (filterValue !== "") {
+    } else if (filterValue !== Filter.NoFilter) {
       filtered = filtered.filter((order) => order.status === filterValue);
     }
 
@@ -36,17 +38,14 @@ export function useFilteredOrders() {
         isTravelingAndInDateRange(order, startDate, endDate)
       );
     }
+    console.log(filtered)
     setFilteredOrders(filtered);
   };
 
   const isNearDelivery = (order: OrderData) => {
-    if (order.status === "Approve") {
-      const currentDate = new Date();
-      const [day, month, year] = order.shippingPromise.split("/").map(Number);
-      const deliveryDate = new Date(year, month - 1, day);
-      const timeDifference = deliveryDate.getTime() - currentDate.getTime();
+    if (order.status === Status.Approve) {
+      const timeDifference = order.shippingPromise.getTime() - Date.now();
       const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
-      
       return daysDifference <= 2;
     }
     return false;
@@ -57,11 +56,9 @@ export function useFilteredOrders() {
     start: Date,
     end: Date
   ) => {
-    if (order.status === "Traveling") {
-      const [day, month, year] = order.createDate.split("/").map(Number);
-      const orderCreateDate = new Date(year, month - 1, day);
+    if (order.status === Status.Traveling) {
 
-      const isInRange = orderCreateDate >= start && orderCreateDate <= end;
+      const isInRange = order.createDate >= start && order.createDate <= end;
       return isInRange;
     }
     return false;

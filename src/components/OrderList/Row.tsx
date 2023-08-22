@@ -5,7 +5,6 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Typography from "@mui/material/Typography";
-import { OrderData } from "../../services/api";
 import {
   Link,
   Table,
@@ -15,6 +14,7 @@ import {
   TableRow,
 } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
+import { OrderData } from "../../domain/OrderData";
 
 export default function Row(props: { row: OrderData }) {
   const { row } = props;
@@ -36,9 +36,9 @@ export default function Row(props: { row: OrderData }) {
           {row.client}
         </TableCell>
         <TableCell align="right">{row.status}</TableCell>
-        <TableCell align="right">{row.createDate}</TableCell>
+        <TableCell align="right">{row.createDate.toLocaleDateString()}</TableCell>
         <TableCell align="right">{row.shippingAddress}</TableCell>
-        <TableCell align="right">{row.shippingPromise}</TableCell>
+        <TableCell align="right">{row.shippingPromise.toLocaleDateString()}</TableCell>
         <TableCell align="right">{row.id}</TableCell>
       </TableRow>
       <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
