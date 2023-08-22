@@ -12,18 +12,20 @@ interface GetOrderListProps {
   status?: Status | undefined;
   startDate?: Date | undefined;
   endDate?: Date | undefined;
+  nearExpiration?: Boolean | undefined;
 }
 
 export const getOrderList = async ({
   status,
   startDate,
   endDate,
+  nearExpiration,
 }: GetOrderListProps = {}): Promise<OrderData[]> => {
-  let filters = status || startDate || endDate ? `?` : "";
+  let filters = status || startDate || endDate || nearExpiration ? `?` : "";
   if (filters) {
     filters += `${status ? `status=${status}&` : ""}${
       startDate ? `startDate=${startDate.getTime()}&` : ""
-    }${endDate ? `endDate=${endDate.getTime()}` : ""}`;
+    }${endDate ? `endDate=${endDate.getTime()}` : ""}${nearExpiration ? `nearExpiration=${nearExpiration}` : ""}`;
   }
   const response = (await fetchWithMock("/orders" + filters)) as OrderDataDto[];
   return response.map((d) => ({
