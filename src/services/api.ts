@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-
-export const fetchWithMock = async (url: string): Promise<any> => {
+export const fetchData = async (url: string): Promise<any> => {
   try {
     const response = await axios.get(`http://localhost:3000/api${url}`);
     console.log(response)

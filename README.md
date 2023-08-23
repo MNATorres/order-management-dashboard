@@ -1,27 +1,41 @@
-# React + TypeScript + Vite
+# Descripcion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+El módulo de gestión de órdenes ha sido desarrollado para atender las necesidades del equipo de logística de un ecommerce. Su objetivo es brindar una interfaz de usuario intuitiva para visualizar, administrar y generar informes relacionados con las órdenes de venta emitidas en el sitio. El módulo opera en base a entidades y atributos simples que representan las órdenes y sus productos asociados.
 
-Currently, two official plugins are available:
+## Caracteristicas Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Órdenes: El sistema permite visualizar las órdenes de venta completadas en el sitio. Cada orden está compuesta por atributos como el ID, fecha de creación, estado (Aprobada, Cancelada, en Entrega, en Tránsito), cliente, dirección de envío, fecha de promesa de entrega y productos asociados.
 
-## Expanding the ESLint configuration
+Productos y Ítems: Cada orden incluye productos, representados por ítems. Cada ítem posee un ID, título, descripción, URL, precio y cantidad.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Interfaz de Usuario Funcional: Se ha implementado una interfaz de usuario (UI) simple pero funcional que permite al equipo de logística revisar todas las órdenes, junto con sus propiedades y los productos asociados. Esta interfaz proporciona una vista clara y detallada de las órdenes emitidas en el sitio, que ademas, tiene una paginacion ara poder visualizar la cantidad de ordenes que desee.
 
-- Configure the top-level `parserOptions` property like this:
+Reportes Personalizados: El módulo dispone de funcionalidad de generación de informes personalizados. Un fltro permite recuperar las órdenes dependiendo el estado, incluso las que esten en estado "Aprobada" que tienen menos de 2 días para cumplir con la promesa de entrega (ShippingPromise). Otro reporte permite seleccionar un rango de fechas y obtener todas las órdenes en estado "Tránsito" dentro de ese período.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Instrucciones de Instalación y Ejecución
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Prerrequisitos
+- Node.js v18.16.0 
+- Yarn v1.22.19
+
+### Pasos para Instalar y Ejecutar
+
+1. Clona el repositorio en tu máquina local:
+
+   ```bash
+   git clone https://github.com/MNATorres/order-management-dashboard
+
+2. Instala las dependencias del proyecto.
+   yarn install
+
+3. Ejecuta el servidor de desarrollo:
+   yarn run dev
+
+4. Ejecuta el backend para visualizar las ordenes:
+
+   ```bash
+   git clone https://github.com/MNATorres/order-management-back
+
+## Próximos Pasos
+
+Una de las prácticas más valiosas en el desarrollo de software es la incorporación de pruebas automatizadas. Aprovecha el potencial de las pruebas unitarias y de integración para asegurarte de que los componentes de tu frontend funcionan como se espera en diferentes situaciones. Utilizar una herramienta como Jest.

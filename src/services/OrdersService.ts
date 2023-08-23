@@ -1,7 +1,7 @@
 // services/orderService.ts
 import { OrderData } from "../domain/OrderData";
 import { Status } from "../domain/Status";
-import { fetchWithMock } from "./api";
+import { fetchData } from "./api";
 
 type OrderDataDto = Exclude<OrderData, "createDate"> & {
   createDate: number;
@@ -27,7 +27,7 @@ export const getOrderList = async ({
       startDate ? `startDate=${startDate.getTime()}&` : ""
     }${endDate ? `endDate=${endDate.getTime()}` : ""}${nearExpiration ? `nearExpiration=${nearExpiration}` : ""}`;
   }
-  const response = (await fetchWithMock("/orders" + filters)) as OrderDataDto[];
+  const response = (await fetchData("/orders" + filters)) as OrderDataDto[];
   return response.map((d) => ({
     ...d,
     createDate: new Date(d.createDate),
