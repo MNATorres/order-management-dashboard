@@ -8,9 +8,9 @@ El módulo de gestión de órdenes ha sido desarrollado para atender las necesid
 
 Productos y Ítems: Cada orden incluye productos, representados por ítems. Cada ítem posee un ID, título, descripción, URL, precio y cantidad.
 
-Interfaz de Usuario Funcional: Se ha implementado una interfaz de usuario (UI) simple pero funcional que permite al equipo de logística revisar todas las órdenes, junto con sus propiedades y los productos asociados. Esta interfaz proporciona una vista clara y detallada de las órdenes emitidas en el sitio, que ademas, tiene una paginacion ara poder visualizar la cantidad de ordenes que desee.
+Interfaz de Usuario Funcional: Se ha implementado una interfaz de usuario (UI) simple pero funcional que permite al equipo de logística revisar todas las órdenes, junto con sus propiedades y los productos asociados. Esta interfaz proporciona una vista clara y detallada de las órdenes emitidas en el sitio, que ademas, tiene una paginacion para poder visualizar la cantidad de ordenes que desee.
 
-Reportes Personalizados: El módulo dispone de funcionalidad de generación de informes personalizados. Un fltro permite recuperar las órdenes dependiendo el estado, incluso las que esten en estado "Aprobada" que tienen menos de 2 días para cumplir con la promesa de entrega (ShippingPromise). Otro reporte permite seleccionar un rango de fechas y obtener todas las órdenes en estado "Tránsito" dentro de ese período.
+Reportes Personalizados: El módulo dispone de funcionalidad de generación de informes personalizados. Un fltro permite recuperar las órdenes dependiendo el estado (Approve, Cancel, Delivery, Traveling), incluso las que esten en estado "Approve" que tienen menos de 2 días para cumplir con la promesa de entrega (ShippingPromise). Otro reporte permite seleccionar un rango de fechas y obtener todas las órdenes en estado "Traveling" dentro de ese período.
 
 ## Instrucciones de Instalación y Ejecución
 
