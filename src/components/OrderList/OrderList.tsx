@@ -10,19 +10,15 @@ import { TableFooter, TablePagination } from "@mui/material";
 import TablePaginationActions from "./TablePaginationActions";
 import Row from "./Row";
 import OrderFilter from "./OrderFilter";
-import { useFilteredOrders } from "../../hooks/useFilterOrders";
 import { OrderData } from "../../domain/OrderData";
+import { useFilteredOrders } from "../../hooks/useFilterOrders";
 
-
-export default function OrderList()  {
+export default function OrderList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(-1);
-  const {orders, filterOrders} = useFilteredOrders()
+  const { orders, filterOrders } = useFilteredOrders();
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -69,8 +65,8 @@ export default function OrderList()  {
         >
           <TableRow>
             <TablePagination
-              sx={{ borderBottom: 0}}
-              rowsPerPageOptions={[ 5, 10, 25,  {label: "All", value: -1 } ]}
+              sx={{ borderBottom: 0 }}
+              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
               colSpan={3}
               count={orders.length}
               rowsPerPage={rowsPerPage}

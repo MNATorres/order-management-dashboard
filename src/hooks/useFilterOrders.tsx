@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect, useState } from "react";
-import { OrderData } from "../../domain/OrderData";
-import { Filter } from "../../domain/Filters";
-import { getOrderList } from "../../services/OrdersService";
-import { mapToStatus } from "../../utils/mappers";
+import { OrderData } from "../domain/OrderData";
+import { Filter } from "../domain/Filters";
+import { getOrderList } from "../services/OrdersService";
+import { mapToStatus } from "../utils/mappers";
 
 interface OrderContextType {
   orders: OrderData[];
@@ -11,7 +11,7 @@ interface OrderContextType {
   endDate: Date | undefined;
   setEndDate: (date: Date | undefined) => void;
   setStartDate: (date: Date | undefined) => void;
-  filterOrders: (filter: Filter) => void;
+  filterOrders: any;
 }
 
 export const OrdersContext = React.createContext<OrderContextType | null>(null);
@@ -58,3 +58,9 @@ export const OrdersProvider = ({ children }: { children: React.ReactNode }) => {
     </OrdersContext.Provider>
   );
 };
+
+export function useFilteredOrders() {
+  const context = useContext(OrdersContext);
+  if (context == null) throw Error("Orders context no initialized");
+  return context;
+}

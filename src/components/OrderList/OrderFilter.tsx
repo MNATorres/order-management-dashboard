@@ -72,9 +72,9 @@ export default function OrderFilter({ onFilter }: OrderFilterProps) {
           </Button>
           <TravelingFilterCalendar />
         </MenuItem>
-        <MenuItem onClick={() => handleStatusClick(Filter.DeliverSoon)}>
+        {/* <MenuItem onClick={() => handleStatusClick(Filter.DeliverSoon)}>
           Expires in 48 hours
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </div>
   );
